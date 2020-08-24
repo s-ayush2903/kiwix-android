@@ -19,10 +19,14 @@
 package org.kiwix.kiwixmobile.main;
 
 import android.Manifest;
+import androidx.core.content.ContextCompat;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.GrantPermissionRule;
+import com.schibsted.spain.barista.interaction.BaristaClickInteractions;
 import com.schibsted.spain.barista.interaction.BaristaMenuClickInteractions;
 import com.schibsted.spain.barista.interaction.BaristaSleepInteractions;
 import org.junit.Before;
@@ -36,6 +40,11 @@ import static org.kiwix.kiwixmobile.testutils.TestUtils.TEST_PAUSE_MS;
 import static org.kiwix.kiwixmobile.testutils.TestUtils.getResourceString;
 import static org.kiwix.kiwixmobile.utils.StandardActions.enterSettings;
 import static org.kiwix.kiwixmobile.utils.StandardActions.openDrawer;
+
+/**
+ * Add tests for history navigation , host books ZimHostActivity whatever it is and supportKiwix(this
+ * starts an intent that shows a dialog and if yes then a browser mein link khol deta hai)
+ **/
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -87,4 +96,32 @@ public class MainActivityTest {
     BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
     clickOn(R.string.download);
   }
+
+  @Test
+  public void navigateZimHostActivity(){
+    BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
+    openDrawer();
+    BaristaMenuClickInteractions.clickMenu(getResourceString(R.string.menu_host_books));
+  }
+
+  @Test
+  public void navigateLocalFileTransfer(){
+    BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
+    clickOn(R.string.library);
+    BaristaMenuClickInteractions.clickMenu(getResourceString(R.string.get_content_from_nearby_device));
+  }
+
+  @Test
+  public void navigateLanguage(){
+    BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
+    clickOn(R.string.download);
+    BaristaMenuClickInteractions.clickMenu(getResourceString(R.string.pref_language_chooser));
+  }
+
+  @Test
+  public void navigateSupport(){
+    BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
+    BaristaMenuClickInteractions.clickMenu(getResourceString(R.string.menu_support_kiwix));
+  }
+
 }
