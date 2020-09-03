@@ -113,6 +113,7 @@ public class MainActivityTest {
   @Test
   public void navigateSupport() {
     BaristaSleepInteractions.sleep(TEST_PAUSE_MS);
+    openDrawer();
     BaristaMenuClickInteractions.clickMenu(getResourceString(R.string.menu_support_kiwix));
   }
 }
